@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Manter Avaliador</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <style>
+        .helper-text{
+            font-weight: bold;
+            color: red !important;
+        }
+
+    </style>
+</head>
+<body>
+<div th:replace="fragment/navbar :: navbar"></div>
+<div class="container">
+    <form th:action="@{/anotacoes/salvar}" th:object="${anotacao}" method="POST">
+        <input type="hidden" name="anotacaoId" th:field="*{id}"/>
+        <div class="card" style="margin-top:5em;">
+            <div class="card-content">
+                <span class="card-title">Manter Anotação</span>
+                <div class="row">
+                    <div class="input-field col s4">
+                        <input id="titulo" name="titulo" type="text" class="validate"
+                               th:field="*{titulo}">
+                        <label for="titulo">Título</label>
+                        <span class="helper-text" data-error="wrong" data-success="right"
+                              th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></span>
+                    </div>
+                    <div class="input-field col s4">
+                        <input id="descricao" name="descricao" type="text" class="validate"
+                               th:field="*{descricao}">
+                        <label for="descricao">Descrição</label>
+                        <span class="helper-text" data-error="wrong" data-success="right"
+                              th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}"></span>
+                    </div>
+                    <div class="input-field col s4">
+                        <input id="url" name="url" type="text" class="validate"
+                               th:field="*{url}">
+                        <label for="url">Url</label>
+                        <span class="helper-text" data-error="wrong" data-success="right"
+                              th:if="${#fields.hasErrors('url')}" th:errors="*{url}"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s4">
+                        <select name="usuario" th:field="*{usuario}">
+                            <option th:value=null th:field="*{usuario}">Selecione</option>
+                            <option th:each="opcao : ${opcaoUsuarios}"
+                                    th:field="*{usuario}"
+                                    th:value="${opcao.id}"
+                                    th:text="${opcao.nome}"></option>
+                        </select>
+                        <label>Usuário</label>
+                        <span class="helper-text" data-error="wrong" data-success="right"
+                              th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}"></span>
+                    </div>
+                    <div class="input-field col s4">
+                        <input id="dataInclusao" disabled name="dataInclusao" type="text" class="validate datepicker"
+                               th:field="*{dataInclusao}">
+                        <label for="dataInclusao">Data de Inclusão</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input id="dataAlteracao" disabled name="dataAlteracao" type="text" class="validate datepicker"
+                               th:field="*{dataAlteracao}">
+                        <label for="dataInclusao">Data de Alteração</label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-action">
+                <button type="submit" class="waves-effect waves-light btn green">Salvar</button>
+                <a th:href="@{/etiquetas/}" class="waves-effect waves-light btn grey">Cancelar</a>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $(document).ready(function() {
+        $('select').formSelect();
+        $('.datepicker').datepicker({
+            i18n: {
+                months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                weekdays: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabádo'],
+                weekdaysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+                weekdaysAbbrev: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+                today: 'Hoje',
+                clear: 'Limpar',
+                cancel: 'Sair',
+                done: 'Confirmar',
+                labelMonthNext: 'Próximo mês',
+                labelMonthPrev: 'Mês anterior',
+                labelMonthSelect: 'Selecione um mês',
+                labelYearSelect: 'Selecione um ano',
+                selectMonths: true,
+                locale: 'pt-br',
+                selectYears: 15,
+            },
+            format: 'yyyy-mm-dd',
+            container: 'body',
+        });
+    });
+</script>
+</body>
+</html>
