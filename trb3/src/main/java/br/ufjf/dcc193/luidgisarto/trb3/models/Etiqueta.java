@@ -12,8 +12,6 @@ public class Etiqueta {
     private String descricao;
     private String url;
 
-    private Item item;
-
     public Etiqueta() {
     }
 

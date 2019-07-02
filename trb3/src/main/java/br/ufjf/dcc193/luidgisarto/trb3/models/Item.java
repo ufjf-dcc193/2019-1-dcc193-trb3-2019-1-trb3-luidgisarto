@@ -1,6 +1,7 @@
 package br.ufjf.dcc193.luidgisarto.trb3.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -12,13 +13,13 @@ public class Item {
 
     private String titulo;
 
-    @ManyToMany
+    @OneToMany
     private List<Etiqueta> etiquetas;
 
-    @ManyToMany
+    @OneToMany
     private List<Anotacao> anotacoes;
 
-    @ManyToMany
+    @OneToMany
     private List<Vinculo> vinculos;
 
     public Item() {
@@ -28,6 +29,14 @@ public class Item {
         this.titulo = titulo;
         this.etiquetas = etiquetas;
         this.anotacoes = anotacoes;
+    }
+
+    public Item(String titulo, Etiqueta etiqueta, Anotacao anotacao) {
+        this.etiquetas = new ArrayList<>();
+        this.anotacoes = new ArrayList<>();
+        this.titulo = titulo;
+        this.etiquetas.add(etiqueta);
+        this.anotacoes.add(anotacao);
     }
 
     public Integer getId() {
