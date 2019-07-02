@@ -94,4 +94,9 @@ public class Anotacao {
     public void setDataAlteracao(Date dataAlteracao) {
         this.dataAlteracao = dataAlteracao;
     }
+
+    @Override
+    public String toString() {
+        return this.titulo;
+    }
 }
