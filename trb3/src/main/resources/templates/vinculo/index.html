@@ -28,12 +28,14 @@
                     <th>Item de Destino</th>
                     <th>Etiquetas</th>
                     <th>Anotações</th>
+                    <th>Ações</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="item: ${itens}" th:object="${item}">
+                <tr th:each="item: ${vinculos}" th:object="${item}">
                     <td th:text="*{id}"></td>
-                    <td th:text="*{titulo}"></td>
+                    <td th:text="*{itemOrigem}"></td>
+                    <td th:text="*{itemDestino}"></td>
                     <td th:text="*{etiquetas}"></td>
                     <td th:text="*{anotacoes}"></td>
                     <td>

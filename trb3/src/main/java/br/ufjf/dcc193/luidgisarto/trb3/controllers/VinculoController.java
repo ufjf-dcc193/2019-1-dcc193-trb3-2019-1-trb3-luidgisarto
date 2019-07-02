@@ -42,7 +42,7 @@ public class VinculoController {
         List<Vinculo> vinculos = vinculoRepository.findAll();
 
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("vinculos/index");
+        mv.setViewName("vinculo/index");
 
         mv.addObject("vinculos", vinculos);
 
