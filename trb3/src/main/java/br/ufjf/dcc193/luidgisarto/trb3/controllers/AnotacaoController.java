@@ -1,10 +1,10 @@
 package br.ufjf.dcc193.luidgisarto.trb3.controllers;
 
-import br.ufjf.dcc193.luidgisarto.trb3.models.Anotacao;
-import br.ufjf.dcc193.luidgisarto.trb3.models.Etiqueta;
-import br.ufjf.dcc193.luidgisarto.trb3.models.Usuario;
-import br.ufjf.dcc193.luidgisarto.trb3.repository.AnotacaoRepository;
-import br.ufjf.dcc193.luidgisarto.trb3.repository.UsuarioRepository;
+import java.util.Date;
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -15,9 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import javax.validation.Valid;
-import java.util.Date;
-import java.util.List;
+import br.ufjf.dcc193.luidgisarto.trb3.models.Anotacao;
+import br.ufjf.dcc193.luidgisarto.trb3.models.Usuario;
+import br.ufjf.dcc193.luidgisarto.trb3.repository.AnotacaoRepository;
+import br.ufjf.dcc193.luidgisarto.trb3.repository.UsuarioRepository;
 
 @Controller
 @RequestMapping("anotacoes")
@@ -84,7 +85,7 @@ public class AnotacaoController {
     @PostMapping("salvar")
     public ModelAndView salvar(@Valid Anotacao anotacao, BindingResult binding) {
         ModelAndView mv = new ModelAndView();
-        if(binding.hasErrors()) {
+        if (binding.hasErrors()) {
             mv.setViewName("anotacao/form");
             mv.addObject("anotacao", anotacao);
             return mv;
