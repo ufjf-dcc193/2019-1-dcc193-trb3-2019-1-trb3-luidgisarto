@@ -34,6 +34,19 @@ public class EtiquetaController {
         return mv;
     }
 
+    @RequestMapping("")
+    public ModelAndView listarItens() {
+        ModelAndView mv = new ModelAndView();
+
+        mv.setViewName("etiqueta/listar-itens");;
+
+
+
+        //mv.addObject("itens", itens);
+
+        return mv;
+    }
+
     @RequestMapping("/nova-etiqueta")
     public ModelAndView novo() {
         ModelAndView mv = new ModelAndView();

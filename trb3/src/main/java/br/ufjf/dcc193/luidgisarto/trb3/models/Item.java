@@ -12,13 +12,13 @@ public class Item {
 
     private String titulo;
 
-    @OneToMany
+    @ManyToMany
     private List<Etiqueta> etiquetas;
 
-    @OneToMany
+    @ManyToMany
     private List<Anotacao> anotacoes;
 
-    @OneToMany
+    @ManyToMany
     private List<Vinculo> vinculos;
 
     public Item() {
@@ -68,5 +68,10 @@ public class Item {
 
     public void setVinculos(List<Vinculo> vinculos) {
         this.vinculos = vinculos;
+    }
+
+    @Override
+    public String toString() {
+        return this.titulo;
     }
 }

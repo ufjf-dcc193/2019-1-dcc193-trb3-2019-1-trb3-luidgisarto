@@ -12,6 +12,8 @@ public class Etiqueta {
     private String descricao;
     private String url;
 
+    private Item item;
+
     public Etiqueta() {
     }
 
@@ -51,5 +53,10 @@ public class Etiqueta {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    @Override
+    public String toString() {
+        return this.titulo;
     }
 }
