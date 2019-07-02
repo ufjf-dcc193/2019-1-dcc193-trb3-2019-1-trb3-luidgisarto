@@ -21,6 +21,15 @@ public class Item {
     @OneToMany
     private List<Vinculo> vinculos;
 
+    public Item() {
+    }
+
+    public Item(String titulo, List<Etiqueta> etiquetas, List<Anotacao> anotacoes) {
+        this.titulo = titulo;
+        this.etiquetas = etiquetas;
+        this.anotacoes = anotacoes;
+    }
+
     public Integer getId() {
         return id;
     }

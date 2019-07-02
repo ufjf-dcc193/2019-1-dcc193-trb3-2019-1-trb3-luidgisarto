@@ -12,6 +12,15 @@ public class Etiqueta {
     private String descricao;
     private String url;
 
+    public Etiqueta() {
+    }
+
+    public Etiqueta(String titulo, String descricao, String url) {
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.url = url;
+    }
+
     public Integer getId() {
         return id;
     }

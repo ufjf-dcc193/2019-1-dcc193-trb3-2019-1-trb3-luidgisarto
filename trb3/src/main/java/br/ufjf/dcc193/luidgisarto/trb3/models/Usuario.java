@@ -13,6 +13,16 @@ public class Usuario {
     private String descricao;
     private String email;
 
+    public Usuario() {
+    }
+
+    public Usuario(String nome, String codigo, String descricao, String email) {
+        this.nome = nome;
+        this.codigo = codigo;
+        this.descricao = descricao;
+        this.email = email;
+    }
+
     public Integer getId() {
         return id;
     }
