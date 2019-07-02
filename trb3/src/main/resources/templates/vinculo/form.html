@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Manter Avaliador</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <style>
+        .helper-text{
+            font-weight: bold;
+            color: red !important;
+        }
+
+    </style>
+</head>
+<body>
+<div th:replace="fragment/navbar :: navbar"></div>
+<div class="container">
+    <form th:action="@{/vinculos/salvar}" th:object="${vinculo}" method="POST">
+        <input type="hidden" name="vinculoId" th:field="*{id}"/>
+        <div class="card" style="margin-top:5em;">
+            <div class="card-content">
+                <span class="card-title" th:text="{'Manter Vínculo' - ${item.titulo}}"></span>
+                <div class="row">
+                    <div class="input-field col s4">
+                        <select disabled name="area" th:field="*{itemOrigem}">
+                            <option th:value=null th:field="*{itemOrigem}">Selecione</option>
+                            <option th:each="opcao : ${opcaoItens}"
+                                    th:field="*{itemOrigem}"
+                                    th:value="${opcao.id}"
+                                    th:text="${opcao.titulo}"></option>
+                        </select>
+                        <label>Item de Origem</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <select name="itemDestino" th:field="*{itemDestino}">
+                            <option th:value=null th:field="*{itemDestino}">Selecione</option>
+                            <option th:each="opcao : ${opcaoItens}"
+                                    th:field="*{itemDestino}"
+                                    th:value="${opcao.id}"
+                                    th:text="${opcao.titulo}"></option>
+                        </select>
+                        <label>Item de Destino</label>
+                        <span class="helper-text" data-error="wrong" data-success="right"
+                              th:if="${#fields.hasErrors('itemDestino')}" th:errors="*{itemDestino}"></span>
+                    </div>
+                    <div class="input-field col s4">
+                        <select multiple name="area" th:field="*{anotacoes}">
+                            <option th:value=null th:field="*{anotacoes}">Selecione</option>
+                            <option th:each="opcao : ${opcoesAnotacao}"
+                                    th:field="*{anotacoes}"
+                                    th:value="${opcao.id}"
+                                    th:text="${opcao.titulo}"></option>
+                        </select>
+                        <label>Anotações</label>
+                        <span class="helper-text" data-error="wrong" data-success="right"
+                              th:if="${#fields.hasErrors('anotacoes')}" th:errors="*{anotacoes}"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s4">
+                        <select multiple name="etiquetas" th:field="*{etiquetas}">
+                            <option th:value=null th:field="*{etiquetas}">Selecione</option>
+                            <option th:each="opcao : ${opcoesEtiquetas}"
+                                    th:field="*{etiquetas}"
+                                    th:value="${opcao.id}"
+                                    th:text="${opcao.titulo}"></option>
+                        </select>
+                        <label>Etiquetas</label>
+                        <span class="helper-text" data-error="wrong" data-success="right"
+                              th:if="${#fields.hasErrors('etiquetas')}" th:errors="*{etiquetas}"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-action">
+                <button type="submit" class="waves-effect waves-light btn green">Salvar</button>
+                <a th:href="@{/itens/}" class="waves-effect waves-light btn grey">Cancelar</a>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $(document).ready(function() {
+        $('select').formSelect();
+    });
+</script>
+</body>
+</html>
