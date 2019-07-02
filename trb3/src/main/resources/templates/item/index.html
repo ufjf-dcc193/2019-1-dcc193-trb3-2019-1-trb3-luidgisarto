@@ -1,10 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Trabalho 2  - Início</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 <body>
+<div th:replace="fragment/navbar :: navbar"></div>
+<div class="container">
+    <div class="row">
+        <div class="col s2" style="margin-top: 2em;">
+            <a class="btn-floating waves-effect waves-light green" href="/itens/novo-item"><i class="material-icons">add</i></a>
+        </div>
+        <div class="col s10">
+            <h3 class="text-center">Itens</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <table>
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Título</th>
+                    <th>Etiquetas</th>
+                    <th>Anotações</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item: ${itens}" th:object="${item}">
+                    <td th:text="*{id}"></td>
+                    <td th:text="*{titulo}"></td>
+                    <td th:text="*{etiquetas}"></td>
+                    <td th:text="*{anotacoes}"></td>
+                    <td>
+                        <a th:href="@{./editar/{id}(id=*{id})}" class="btn-floating btn-small orange"><i class="material-icons left">edit</i></a>
+                        <a th:href="@{./excluir/{id}(id=*{id})}" class="btn-floating btn-small red"><i class="material-icons left">delete</i></a>
+                    </td>
+                </tr>
 
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 </body>
-</html>

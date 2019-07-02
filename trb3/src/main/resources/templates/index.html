@@ -1,12 +1,52 @@
 <!DOCTYPE html>
-<html lang="pt" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Trabalho 3 - DCC 193</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 </head>
 <body>
     <div th:replace="fragment/navbar :: navbar"></div>
+</body>
+<div class="container">
+    <div class="row">
+        <div class="col s10">
+            <h3 class="text-center">Itens por Etiqueta</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <table>
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Avaliador</th>
+                    <th>Trabalho</th>
+                    <th>Nota</th>
+                    <th>Descrição</th>
+                    <th>Situação</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="revisao: ${revisoes}" th:object="${revisao}">
+                    <td th:text="*{id}"></td>
+                    <td th:text="*{avaliador}"></td>
+                    <td th:text="*{trabalho}"></td>
+                    <td th:text="*{nota}"></td>
+                    <td th:text="*{descricao}"></td>
+                    <td th:text="*{situacao}"></td>
+                    <td>
+                        <a th:href="@{./editar/{id}(id=*{id})}" class="btn-floating btn-small orange"><i class="material-icons left">edit</i></a>
+                        <a th:href="@{./excluir/{id}(id=*{id})}" class="btn-floating btn-small red"><i class="material-icons left">delete</i></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 </body>
 </html>
