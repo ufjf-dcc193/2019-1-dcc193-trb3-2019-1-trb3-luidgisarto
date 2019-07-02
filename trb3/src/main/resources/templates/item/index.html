@@ -27,10 +27,11 @@
                     <th>Título</th>
                     <th>Etiquetas</th>
                     <th>Anotações</th>
+                    <th>Ações</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="item: ${itens}" th:object="${item}">
+                <tr th:each="obj: ${itens}" th:object="${obj}">
                     <td th:text="*{id}"></td>
                     <td th:text="*{titulo}"></td>
                     <td th:text="*{etiquetas}"></td>

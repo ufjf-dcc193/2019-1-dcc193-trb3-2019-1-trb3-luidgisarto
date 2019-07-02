@@ -70,9 +70,15 @@ public class ItemController {
 
         Item item = itemRepository.getOne(id);
 
+        List<Anotacao> anotacoes = anotacaoRepository.findAll();
+
+        List<Etiqueta> etiquetas = etiquetaRepository.findAll();
+
         mv.setViewName("item/form");
 
         mv.addObject("item", item);
+        mv.addObject("opcoesAnotacao", anotacoes);
+        mv.addObject("opcoesEtiquetas", etiquetas);
 
         return mv;
     }
