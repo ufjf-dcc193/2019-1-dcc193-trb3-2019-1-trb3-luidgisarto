@@ -7,19 +7,19 @@ import java.util.List;
 @Entity
 public class Item {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "item_id")
     private Integer id;
 
     private String titulo;
 
-    @OneToMany
+    @ManyToMany()
     private List<Etiqueta> etiquetas;
 
-    @OneToMany
+    @ManyToMany()
     private List<Anotacao> anotacoes;
 
-    @OneToMany
+    @ManyToMany(mappedBy = "itens", fetch = FetchType.EAGER)
     private List<Vinculo> vinculos;
 
     public Item() {

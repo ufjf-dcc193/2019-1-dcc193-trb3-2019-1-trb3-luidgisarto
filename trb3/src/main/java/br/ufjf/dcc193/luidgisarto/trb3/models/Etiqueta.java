@@ -1,16 +1,20 @@
 package br.ufjf.dcc193.luidgisarto.trb3.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Etiqueta {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "etiqueta_id")
     private Integer id;
     private String titulo;
     private String descricao;
     private String url;
+
+    @ManyToMany(mappedBy = "etiquetas")
+    private List<Item> Itens;
 
     public Etiqueta() {
     }
@@ -51,6 +55,14 @@ public class Etiqueta {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public List<Item> getItens() {
+        return Itens;
+    }
+
+    public void setItens(List<Item> itens) {
+        Itens = itens;
     }
 
     @Override

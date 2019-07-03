@@ -1,12 +1,13 @@
 package br.ufjf.dcc193.luidgisarto.trb3.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Vinculo {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "vinculo_id")
     private Integer id;
 
@@ -16,10 +17,13 @@ public class Vinculo {
     @ManyToOne
     private Item itemDestino;
 
-    @OneToMany
+    @ManyToMany()
     private List<Etiqueta> etiquetas;
 
-    @OneToMany
+    @ManyToMany()
+    private List<Item> itens;
+
+    @ManyToMany()
     private List<Anotacao> anotacoes;
 
     public Integer getId() {
@@ -60,5 +64,26 @@ public class Vinculo {
 
     public void setAnotacoes(List<Anotacao> anotacoes) {
         this.anotacoes = anotacoes;
+    }
+
+    public List<Item> getItens() {
+        return this.itens;
+    }
+
+    public void setItens(List<Item> itens) {
+        itens = itens;
+    }
+
+    public void adicionarItem(Item itemOrigem, Item itemDestino){
+        if(this.itens == null) {
+            this.itens = new ArrayList<>();
+        }
+        this.itens.add(itemOrigem);
+        this.itens.add(itemDestino);
+    }
+
+    @Override
+    public String toString() {
+        return this.itemOrigem + "/" + this.itemDestino;
     }
 }

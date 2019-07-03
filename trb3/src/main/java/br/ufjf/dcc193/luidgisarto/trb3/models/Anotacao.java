@@ -4,11 +4,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Anotacao {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "anotacao_id")
     private Integer id;
 
@@ -26,6 +27,9 @@ public class Anotacao {
     private Date dataAlteracao;
     @ManyToOne
     private Usuario usuario;
+
+    @ManyToMany(mappedBy = "anotacoes")
+    private List<Item> Itens;
 
     public Anotacao() {
     }
@@ -93,6 +97,14 @@ public class Anotacao {
 
     public void setDataAlteracao(Date dataAlteracao) {
         this.dataAlteracao = dataAlteracao;
+    }
+
+    public List<Item> getItens() {
+        return Itens;
+    }
+
+    public void setItens(List<Item> itens) {
+        Itens = itens;
     }
 
     @Override
