@@ -66,6 +66,9 @@
             <div class="card-content">
                 <span class="card-title">Vínculos</span>
         <div class="row">
+            <div class="col s2" style="margin-top: 2em;">
+                <a th:href="@{/vinculos/novo-vinculo/{id}(id=*{id})}" class="btn-floating btn-small blue"><i class="material-icons left">add</i></a>
+            </div>
             <div class="col s12">
                 <table>
                     <thead>
@@ -79,7 +82,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="vinc: ${item.vinculos}" th:object="${vinc}">
+                    <tr th:each="vinc: ${item.getVinculos()}" th:object="${vinc}">
                         <td th:text="*{id}"></td>
                         <td th:text="*{itemOrigem}"></td>
                         <td th:text="*{itemDestino}"></td>

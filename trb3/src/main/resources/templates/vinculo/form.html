@@ -25,7 +25,7 @@
                 <span class="card-title" th:text="'Manter Vínculo'"></span>
                 <div class="row">
                     <div class="input-field col s4">
-                        <select disabled name="area" th:field="*{itemOrigem}">
+                        <select name="itemOrigem" th:field="*{itemOrigem}">
                             <option th:value=null th:field="*{itemOrigem}">Selecione</option>
                             <option th:each="opcao : ${opcaoItens}"
                                     th:field="*{itemOrigem}"

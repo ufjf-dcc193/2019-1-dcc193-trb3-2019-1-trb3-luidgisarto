@@ -14,30 +14,27 @@
         <div class="col s2" style="margin-top: 2em;">
         </div>
         <div class="col s10">
-            <h3 class="text-center">Itens por Etiquetas</h3>
+            <h3 class="text-center" th:object="${etiqueta}">Itens por Etiqueta</h3>
         </div>
     </div>
-    <div class="row">
+    <div class="row" th:object="${etiqueta}">
         <div class="col s12">
             <table>
                 <thead>
                 <tr>
                     <th>Id</th>
                     <th>Título</th>
-                    <th>Descrição</th>
-                    <th>Url</th>
+                    <th>Vínculos
                     <th>Ações</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="etiqueta: ${etiquetas}" th:object="${etiqueta}">
+                <tr th:each="item: ${etiqueta.itens}" th:object="${item}">
                     <td th:text="*{id}"></td>
                     <td th:text="*{titulo}"></td>
-                    <td th:text="*{descricao}"></td>
-                    <td th:text="*{url}"></td>
+                    <td th:text="*{vinculos}"></td>
                     <td>
-                        <a th:href="@{./editar/{id}(id=*{id})}" class="btn-floating btn-small orange"><i class="material-icons left">edit</i></a>
-                        <a th:href="@{./excluir/{id}(id=*{id})}" class="btn-floating btn-small red"><i class="material-icons left">delete</i></a>
+                        <a th:href="@{/etiquetas/}" class="btn-floating btn-small black"><i class="material-icons left">arrow_back</i></a>
                     </td>
                 </tr>
 
