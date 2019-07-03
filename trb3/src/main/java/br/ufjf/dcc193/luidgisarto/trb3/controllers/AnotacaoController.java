@@ -64,7 +64,7 @@ public class AnotacaoController {
     public ModelAndView editar(@PathVariable Integer id) {
         ModelAndView mv = new ModelAndView();
 
-        Anotacao anotacao = anotacaoRepository.getOne(id);
+        Anotacao anotacao = anotacaoRepository.findById(id).orElse(null);
         List<Usuario> usuarios = usuarioRepository.findAll();
 
         mv.setViewName("anotacao/form");
@@ -77,7 +77,7 @@ public class AnotacaoController {
 
     @GetMapping("/excluir/{id}")
     public RedirectView excluir(@PathVariable Integer id) {
-        Anotacao anotacao = anotacaoRepository.getOne(id);
+        Anotacao anotacao = anotacaoRepository.findById(id).orElse(null);
         anotacaoRepository.delete(anotacao);
         return new RedirectView("/anotacoes/");
     }

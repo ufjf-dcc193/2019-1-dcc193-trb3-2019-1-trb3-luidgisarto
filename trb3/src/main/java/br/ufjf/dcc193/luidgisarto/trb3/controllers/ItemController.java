@@ -68,7 +68,7 @@ public class ItemController {
     public ModelAndView editar(@PathVariable Integer id) {
         ModelAndView mv = new ModelAndView();
 
-        Item item = itemRepository.getOne(id);
+        Item item = itemRepository.findById(id).orElse(null);
 
         List<Anotacao> anotacoes = anotacaoRepository.findAll();
 
@@ -85,7 +85,7 @@ public class ItemController {
 
     @GetMapping("/excluir/{id}")
     public RedirectView excluir(@PathVariable Integer id) {
-        Item item = itemRepository.getOne(id);
+        Item item = itemRepository.findById(id).orElse(null);
         itemRepository.delete(item);
         return new RedirectView("/itens/");
     }

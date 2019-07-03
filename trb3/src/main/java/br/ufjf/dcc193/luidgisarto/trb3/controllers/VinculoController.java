@@ -53,17 +53,13 @@ public class VinculoController {
     public ModelAndView novo(@PathVariable Integer id) {
         ModelAndView mv = new ModelAndView();
 
-        Item item = itemRepository.getOne(id);
+        Item item = itemRepository.findById(id).orElse(null);
 
         List<Item> itens = itemRepository.findAll();
+        List<Anotacao> anotacoes = anotacaoRepository.findAll();
+        List<Etiqueta> etiquetas = etiquetaRepository.findAll();
 
         Vinculo vinculo = new Vinculo();
-
-        vinculo.setItemOrigem(item);
-
-        List<Anotacao> anotacoes = anotacaoRepository.findAll();
-
-        List<Etiqueta> etiquetas = etiquetaRepository.findAll();
 
         mv.setViewName("vinculo/form");
 
@@ -80,20 +76,27 @@ public class VinculoController {
     public ModelAndView editar(@PathVariable Integer id) {
         ModelAndView mv = new ModelAndView();
 
-        Vinculo vinculo = vinculoRepository.getOne(id);
+        List<Item> itens = itemRepository.findAll();
+        List<Anotacao> anotacoes = anotacaoRepository.findAll();
+        List<Etiqueta> etiquetas = etiquetaRepository.findAll();
+
+        Vinculo vinculo = vinculoRepository.findById(id).orElse(null);
 
         mv.setViewName("vinculo/form");
 
         mv.addObject("vinculo", vinculo);
+        mv.addObject("opcaoItens", itens);
+        mv.addObject("opcoesAnotacao", anotacoes);
+        mv.addObject("opcoesEtiquetas", etiquetas);
 
         return mv;
     }
 
     @GetMapping("/excluir/{id}")
     public RedirectView excluir(@PathVariable Integer id) {
-        Vinculo vinculo = vinculoRepository.getOne(id);
+        Vinculo vinculo = vinculoRepository.findById(id).orElse(null);
         vinculoRepository.delete(vinculo);
-        return new RedirectView("/vinculos/");
+        return new RedirectView("/itens/");
     }
 
     @PostMapping("salvar")
@@ -104,8 +107,9 @@ public class VinculoController {
             mv.addObject("vinculo", vinculo);
             return mv;
         }
+        vinculo.adicionarItem(vinculo.getItemOrigem(), vinculo.getItemDestino());
         vinculoRepository.save(vinculo);
-        mv.setViewName("redirect:/vinculos/");
+        mv.setViewName("redirect:/itens/editar/" + vinculo.getItemOrigem().getId());
         return mv;
     }
 }

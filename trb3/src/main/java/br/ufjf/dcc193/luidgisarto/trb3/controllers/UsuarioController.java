@@ -53,7 +53,7 @@ public class UsuarioController {
     public ModelAndView editar(@PathVariable Integer id) {
         ModelAndView mv = new ModelAndView();
 
-        Usuario usuario = usuarioRepository.getOne(id);
+        Usuario usuario = usuarioRepository.findById(id).orElse(null);
 
         mv.setViewName("usuario/form");
 
@@ -64,7 +64,7 @@ public class UsuarioController {
 
     @GetMapping("/excluir/{id}")
     public RedirectView excluir(@PathVariable Integer id) {
-        Usuario usuario = usuarioRepository.getOne(id);
+        Usuario usuario = usuarioRepository.findById(id).orElse(null);
         usuarioRepository.delete(usuario);
         return new RedirectView("/usuarios/");
     }

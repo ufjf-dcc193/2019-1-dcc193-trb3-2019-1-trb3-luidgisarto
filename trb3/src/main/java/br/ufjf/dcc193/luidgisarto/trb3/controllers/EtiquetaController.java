@@ -21,7 +21,7 @@ public class EtiquetaController {
     @Autowired
     EtiquetaRepository etiquetaRepository;
 
-    @RequestMapping({ "/" })
+    @GetMapping({ "/" })
     public ModelAndView listar() {
 
         List<Etiqueta> etiquetas = etiquetaRepository.findAll();
@@ -34,20 +34,20 @@ public class EtiquetaController {
         return mv;
     }
 
-    @RequestMapping("")
-    public ModelAndView listarItens() {
+    @GetMapping("listar-itens/{id}")
+    public ModelAndView listarItens(@PathVariable Integer id) {
         ModelAndView mv = new ModelAndView();
+
+        Etiqueta etiqueta = etiquetaRepository.findById(id).orElse(null);
 
         mv.setViewName("etiqueta/listar-itens");;
 
-
-
-        //mv.addObject("itens", itens);
+        mv.addObject("etiqueta", etiqueta);
 
         return mv;
     }
 
-    @RequestMapping("/nova-etiqueta")
+    @GetMapping("/nova-etiqueta")
     public ModelAndView novo() {
         ModelAndView mv = new ModelAndView();
 
@@ -64,7 +64,7 @@ public class EtiquetaController {
     public ModelAndView editar(@PathVariable Integer id) {
         ModelAndView mv = new ModelAndView();
 
-        Etiqueta etiqueta = etiquetaRepository.getOne(id);
+        Etiqueta etiqueta = etiquetaRepository.findById(id).orElse(null);
 
         mv.setViewName("etiqueta/form");
 
@@ -75,7 +75,7 @@ public class EtiquetaController {
 
     @GetMapping("/excluir/{id}")
     public RedirectView excluir(@PathVariable Integer id) {
-        Etiqueta etiqueta = etiquetaRepository.getOne(id);
+        Etiqueta etiqueta = etiquetaRepository.findById(id).orElse(null);
         etiquetaRepository.delete(etiqueta);
         return new RedirectView("/etiquetas/");
     }
